@@ -36,7 +36,7 @@ function App() {
       <Route path="*" element={<Navigate replace to="/"/>}/>
     </Routes>
     </>
-  );
+  );   
 }
 
 export default App;
