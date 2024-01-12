@@ -23,7 +23,7 @@ function App() {
       <Link to="/posts/edit/:id">Post Edit</Link>
       </li>
       <li>
-      <Link to="/posts/profile">Profile</Link>
+      <Link to="/posts/profile">Profile </Link>
       </li>
     </ul>
     <Routes>
