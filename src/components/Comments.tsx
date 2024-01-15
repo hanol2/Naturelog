@@ -15,6 +15,7 @@ export default function Comments({ post, getPost }: CommentsProps) {
   const [comment, setComment] = useState("");
   const { user } = useContext(AuthContext);
   console.log(user, "유저");
+  console.log(post, "post");
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const {
