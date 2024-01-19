@@ -51,6 +51,7 @@ export default function LoginForm() {
   };
   return (
     <form onSubmit={onSubmit} className="form form--lg">
+      <h1 className="form__logo-title">Naturelog</h1>
       <h1 className="form__title">로그인</h1>
       <div className="form__block">
         <input
@@ -71,7 +72,7 @@ export default function LoginForm() {
           required
           onChange={onChange}
           value={password}
-          placeholder="비밀번호 입력(영문, 숫자, 특수문자 조합)"
+          placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합)"
         ></input>
       </div>
       {error && error?.length > 0 && (

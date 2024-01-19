@@ -25,20 +25,15 @@ header {
 }
 
 header .header__logo {
-  color: black;
-  font-weight: 600;
-  font-size: 18px;
+  color: #28B860;
+  font-weight: bold;
+  font-size: 28px;
 }
 
 header a {
   margin: 0px 10px;
   text-decoration: none;
   color: gray;
-}
-
-header a:focus,
-header a:hover {
-  color: black;
 }
 
 /* footer */
@@ -394,7 +389,7 @@ input:checked+.carousel__slide-container .nav label {
 /* form */
 .form {
   margin: 0 auto;
-  max-width: 680px;
+  max-width: 450px;
   padding: 20px;
   margin-top: 20px;
 }
@@ -441,13 +436,13 @@ input:checked+.carousel__slide-container .nav label {
   cursor: pointer;
   margin: 0 auto;
   font-size: 16px;
-  background-color: #2563eb;
+  background-color: #28B860;
   color: white;
 }
 
 .form .form__btn--submit:hover,
 .form .form__btn--submit:focus {
-  background-color: #1945a4;
+  background-color:#1e8d49;
 }
 
 /* login form */
@@ -457,6 +452,11 @@ input:checked+.carousel__slide-container .nav label {
   margin-top: 10vh;
 }
 
+.form__logo-title {
+  color: #28B860;
+  text-align: center;
+  margin-bottom: 4px;
+}
 .form__title {
   text-align: center;
   margin-bottom: 4px;
@@ -542,7 +542,7 @@ input:checked+.carousel__slide-container .nav label {
   height: 36px;
   cursor: pointer;
   font-weight: 500;
-  background-color: #2563eb;
+  background-color: #28B860;
   color: white;
   border: none;
   border-radius: 5px;
