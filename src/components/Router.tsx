@@ -1,6 +1,4 @@
-import { useState } from "react";
-
-import { Routes, Route, Navigate, Link } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "pages/home";
 import PostList from "pages/posts";
 import PostDetail from "pages/posts/detail";

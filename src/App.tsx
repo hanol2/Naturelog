@@ -5,6 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ThemeContext from "context/ThemeContext";
 import Router from "./components/Router";
+import Loader from "components/Loader";
 
 function App() {
   const context = useContext(ThemeContext);
