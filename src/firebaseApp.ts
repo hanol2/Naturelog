@@ -13,15 +13,17 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_ID
 };
 
-
 try {
-  app = getApp("app")
+    app = getApp("app")
 } catch (e) {
-  app = initializeApp(firebaseConfig, 'app')
+    app = initializeApp(firebaseConfig, "app")
 }
 
 const firebase = initializeApp(firebaseConfig);
-
 export const db = getFirestore(app);
 
 export default firebase;
+
+
+
+

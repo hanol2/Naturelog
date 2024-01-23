@@ -15,8 +15,8 @@ export const ThemeContextProvider = ({ children }: ThemeProps) => {
   );
 
   const toggleMode = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-    window.localStorage.setItem("theme", theme === "light" ? "dark" : "light");
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+    window.localStorage.setItem("theme", theme === "light" ? "dard" : "light");
   };
 
   return (

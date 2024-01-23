@@ -25,6 +25,13 @@ export interface CommentsInterface {
   createdAt: string;
 }
 
+export interface CommentsInterface {
+  content: string;
+  uid: string;
+  email: string;
+  createdAt: string;
+}
+
 export interface PostProps {
   id?: string;
   title: string;
@@ -52,6 +59,7 @@ export default function PostList({
   );
   const [posts, setPosts] = useState<PostProps[]>([]);
   const { user } = useContext(AuthContext);
+  const imagePath = process.env.PUBLIC_URL + "/noposting.png";
 
   const getPosts = async () => {
     // posts 초기화
@@ -131,37 +139,31 @@ export default function PostList({
           ))}
         </div>
       )}
-      <div className="post__list">
+      <div className={posts?.length > 0 ? "post__list" : "post__no-post"}>
         {posts?.length > 0 ? (
           posts?.map((post) => (
-            <div key={post?.id} className="post__box">
-              <Link to={`/posts/${post?.id}`}>
+            <Link to={`/posts/${post?.id}`}>
+              <div key={post?.id} className="post__box">
                 <div className="post__profile-box">
                   <div className="post__profile" />
                   <div className="post__author-name">{post?.email}</div>
-                  <div className="post__date">{post?.createdAt}</div>
                 </div>
+                <div className="post__date">{post?.createdAt}</div>
                 <div className="post__title">{post?.title}</div>
                 <div className="post__text">{post?.summary}</div>
-              </Link>
-              {post?.uid === user?.uid && (
-                <div className="post__utils-box">
-                  <div
-                    className="post__delete"
-                    role="presentation"
-                    onClick={() => handleDelete(post.id as string)}
-                  >
-                    삭제
-                  </div>
-                  <Link to={`/posts/edit/${post?.id}`} className="post__edit">
-                    수정
-                  </Link>
-                </div>
-              )}
-            </div>
+              </div>
+            </Link>
           ))
         ) : (
-          <div className="post__no-post">게시글이 없습니다.</div>
+          <>
+            <img src={imagePath} alt="no post"></img>
+            <div className="no__post">게시글이 없습니다.</div>
+            <div className="post__button-box">
+              <Link to="/posts/new" className="post__button">
+                글쓰기
+              </Link>
+            </div>
+          </>
         )}
       </div>
     </>

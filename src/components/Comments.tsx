@@ -1,21 +1,17 @@
+import AuthContext from "context/AuthContext";
 import { useContext, useState } from "react";
 import { CommentsInterface, PostProps } from "./PostList";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
 import { db } from "firebaseApp";
-import AuthContext from "context/AuthContext";
 import { toast } from "react-toastify";
 
 interface CommentsProps {
   post: PostProps;
   getPost: (id: string) => Promise<void>;
 }
-
-export default function Comments({ post, getPost }: CommentsProps) {
-  console.log(post?.comments?.slice(0).reverse(), "댓글 최신순");
+export default function Commets({ post, getPost }: CommentsProps) {
   const [comment, setComment] = useState("");
   const { user } = useContext(AuthContext);
-  console.log(user, "유저");
-  console.log(post, "post");
 
   const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const {
@@ -32,9 +28,8 @@ export default function Comments({ post, getPost }: CommentsProps) {
     try {
       if (post && post?.id) {
         const postRef = doc(db, "posts", post.id);
-
         if (user?.uid) {
-          const commentObj = {
+          const commnetObj = {
             content: comment,
             uid: user.uid,
             email: user.email,
@@ -45,7 +40,7 @@ export default function Comments({ post, getPost }: CommentsProps) {
             }),
           };
           await updateDoc(postRef, {
-            comments: arrayUnion(commentObj),
+            comments: arrayUnion(commnetObj),
             updateDated: new Date()?.toLocaleDateString("ko", {
               hour: "2-digit",
               minute: "2-digit",
@@ -65,13 +60,13 @@ export default function Comments({ post, getPost }: CommentsProps) {
   };
 
   const handleDeleteComment = async (data: CommentsInterface) => {
-    const confirm = window.confirm("해당 댓글을 삭제하시겠습니까?");
+    const confirm = window.confirm("해당 댓을을 삭제하시겠습니까?");
     if (confirm && post.id) {
-      console.log(data);
       const postRef = doc(db, "posts", post.id);
       await updateDoc(postRef, {
         comments: arrayRemove(data),
       });
+
       toast.success("댓글을 삭제했습니다.");
       // 문서 업데이트
       await getPost(post.id);
@@ -82,7 +77,7 @@ export default function Comments({ post, getPost }: CommentsProps) {
     <div className="comments">
       <form className="comments__form" onSubmit={onSubmit}>
         <div className="form__block">
-          <label htmlFor="comment">댓글입력</label>
+          <label htmlFor="comment">댓글 입력</label>
           <textarea
             name="comment"
             id="comment"
@@ -92,19 +87,23 @@ export default function Comments({ post, getPost }: CommentsProps) {
           />
         </div>
         <div className="form__block form__block-reverse">
-          <input type="submit" value="입력" className="form__btn-submit" />
+          <input
+            type="submit"
+            value="입력"
+            className="form__btn--submit"
+          ></input>
         </div>
       </form>
       <div className="comments__list">
         {post?.comments
           ?.slice(0)
-          .reverse()
+          ?.reverse()
           .map((comment) => (
             <div key={comment.createdAt} className="comment__box">
               <div className="comment__profile-box">
                 <div className="comment__email">{comment?.email}</div>
                 <div className="comment__date">{comment?.createdAt}</div>
-                {user?.uid === comment.uid && (
+                {comment.uid === user?.uid && (
                   <div
                     className="comment__delete"
                     onClick={() => handleDeleteComment(comment)}
@@ -119,4 +118,7 @@ export default function Comments({ post, getPost }: CommentsProps) {
       </div>
     </div>
   );
+}
+function getPost(id: string) {
+  throw new Error("Function not implemented.");
 }
